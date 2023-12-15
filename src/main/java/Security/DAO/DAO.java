@@ -7,7 +7,7 @@ import jakarta.persistence.EntityManagerFactory;
 import java.util.List;
 
 public class DAO<T, E> implements IDAO <T, E> {
-    EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+    protected EntityManagerFactory emf;
 
     @Override
     public List<E> getAll(Class<E> eClass) {

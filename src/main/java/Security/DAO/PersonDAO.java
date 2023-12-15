@@ -1,8 +1,12 @@
 package Security.DAO;
 
 import DTO.PersonDTO;
+import Exceptions.APIException;
 import Model.Person;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
@@ -44,4 +48,29 @@ public class PersonDAO extends DAO<PersonDTO, Person> {
             em.getTransaction().commit();
             return person;
         }    }
+
+    public Person getPersonByEmailAndPassword(String email, String password) throws APIException{
+        try(EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Person> namedQuery = em.createNamedQuery("Person.getPersonByEmail", Person.class);
+            namedQuery.setParameter("email", email);
+            Person foundPerson = namedQuery.getSingleResult();
+            if(foundPerson == null){
+                throw new APIException(400, "No user with email: " + email + " is found. Please try again.");
+            } else if (!foundPerson.verifyPassword(password)){
+                throw new APIException(400, "Incorrect password");
+            }
+            return foundPerson;
+        }
+    }
+
+    public Person registerPerson(String email, String password, String name, String role) {
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+
+            Person newPerson = new Person(email, password, name, role);
+            em.persist(newPerson);
+            em.getTransaction().commit();
+            return newPerson;
+        }
+    }
 }

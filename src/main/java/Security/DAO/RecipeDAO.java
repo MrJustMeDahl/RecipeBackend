@@ -1,7 +1,9 @@
 package Security.DAO;
 
+import Config.HibernateConfig;
 import DTO.RecipeDTO;
 import Model.Recipe;
+import jakarta.persistence.EntityManagerFactory;
 
 public class RecipeDAO extends DAO <RecipeDTO, Recipe>{
 
