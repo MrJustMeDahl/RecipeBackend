@@ -43,6 +43,7 @@ public class TokenCreator {
             headerAndPayload.sign(signer);
             return headerAndPayload.serialize();
         }catch (JOSEException e){
+            System.out.println(e.getMessage());
             throw new APIException(500, "Signing of token failed");
         }
     }

@@ -1,0 +1,63 @@
+POST http://localhost:7070/api/auth/register
+content-type: application/json
+
+{
+  "email": "cph-test@cphbusiness.dk",
+  "password": "dettebliverhashet",
+  "role": "reader",
+  "name": "Test Testesen"
+}
+
+###
+
+POST http://localhost:7070/api/auth/register
+content-type: application/json
+
+{
+"email": "cph-test@cphbusiness2.dk",
+"password": "dettebliverhashet2",
+"role": "admin",
+"name": "Test Testesen2"
+}
+
+###
+
+POST http://localhost:7070/api/auth/register
+content-type: application/json
+
+{
+"email": "cph-test@cphbusiness3.dk",
+"password": "dettebliverhashet3",
+"role": "author",
+"name": "Test Testesen3"
+}
+
+###
+
+POST http://localhost:7070/api/auth/login
+content-type: application/json
+
+{
+  "email": "cph-test@cphbusiness.dk",
+  "password": "dettebliverhashet"
+}
+
+###
+
+POST http://localhost:7070/api/auth/login
+content-type: application/json
+
+{
+  "email": "cph-test@cphbusiness2.dk",
+  "password": "dettebliverhashet2"
+}
+
+###
+
+POST http://localhost:7070/api/auth/login
+content-type: application/json
+
+{
+  "email": "cph-test@cphbusiness3.dk",
+  "password": "dettebliverhashet3"
+}

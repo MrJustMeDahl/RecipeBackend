@@ -18,19 +18,18 @@ public class AccessManagerController {
 
         String path = context.path();
         boolean accessAllowed = false;
-            if (path.equals("/api/person/login") || path.equals("/api/person/register") || routeRoles.contains(RoutingRoles.ANYONE)) {
+            if (path.equals("/api/auth/login") || path.equals("/api/auth/register") || routeRoles.contains(RoutingRoles.ANYONE)) {
                 handler.handle(context);
             } else {
                 RoutingRoles userRole = getUserRole(context);
                     if(routeRoles.contains(userRole)){
                         accessAllowed = true;
                     }
-            }
-
-            if(accessAllowed){
-                handler.handle(context);
-            } else {
-                throw new APIException(403, "You are not permitted to perform your this request");
+                if(accessAllowed){
+                    handler.handle(context);
+                } else {
+                    throw new APIException(403, "You are not permitted to perform your this request");
+                }
             }
     }
 
