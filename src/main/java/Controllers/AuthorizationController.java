@@ -1,6 +1,5 @@
 package Controllers;
 
-import Config.HibernateConfig;
 import Exceptions.APIException;
 import Model.Person;
 import Security.DAO.PersonDAO;

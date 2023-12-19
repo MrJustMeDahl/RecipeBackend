@@ -1,7 +1,12 @@
 package DTO;
 
+import Model.Recipe;
 import lombok.Getter;
 import Model.Person;
+
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 public class PersonDTO {
     public int id;
@@ -9,6 +14,7 @@ public class PersonDTO {
     public String password;
     public String email;
     public String role;
+    private Set<RecipeDTO> recipes = new HashSet<>();
 
 
     public PersonDTO(int id, String name, String password, String email, String role) {
@@ -32,6 +38,9 @@ public class PersonDTO {
         this.password = person.getPassword();
         this.email = person.getEmail();
         this.role = person.getRole();
+        for(Recipe r: person.getRecipes()){
+            recipes.add(new RecipeDTO(r));
+        }
     }
 
     public PersonDTO() {

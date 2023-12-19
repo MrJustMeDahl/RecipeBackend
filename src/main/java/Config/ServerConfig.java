@@ -4,6 +4,7 @@ import Controllers.AccessManagerController;
 import Routing.Routes;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
+import io.javalin.http.Context;
 import io.javalin.plugin.bundled.RouteOverviewPlugin;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -19,8 +20,17 @@ public class ServerConfig {
     public static void startJavalinServer(Javalin app, int port){
         app.updateConfig(ServerConfig::javalinConfiguration);
         Routes routes = new Routes();
+        app.before(ServerConfig::corsConfig);
+        app.options("/*", ServerConfig::corsConfig);
         app.routes(routes.getRoutes(app));
         app.start(port);
+    }
+
+    public static void corsConfig(Context ctx) {
+        ctx.header("Access-Control-Allow-Origin", "*");
+        ctx.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        ctx.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        ctx.header("Access-Control-Allow-Credentials", "true");
     }
 
     private static void javalinConfiguration(JavalinConfig config){

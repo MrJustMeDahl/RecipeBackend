@@ -1,0 +1,90 @@
+GET localhost:7070/api/persons
+Authorization: Bearer {{token}}
+###
+GET localhost:7070/api/persons/2
+Authorization: Bearer {{token}}
+
+###
+GET localhost:7070/api/persons/name/navn1
+Authorization: Bearer {{token}}
+
+###
+POST localhost:7070/api/persons
+Authorization: Bearer {{token}}
+accept: application/json
+content-type: application/json
+
+{
+  "name": "navn4",
+  "email": "navn4@mail.com",
+  "role": "user"
+}
+###
+PUT localhost:7070/api/persons/1
+Authorization: Bearer {{token}}
+accept: application/json
+content-type: application/json
+
+{
+  "id": "1",
+  "name": "nytNavn1",
+  "password": "test",
+  "email": "nyEmail1@mail.com",
+  "role": "admin"
+}
+###
+DELETE localhost:7070/api/persons/1
+Authorization: Bearer {{token}}
+###
+
+GET localhost:7070/api/recipes
+Authorization: Bearer {{token}}
+
+###
+GET localhost:7070/api/recipes/2
+Authorization: Bearer {{token}}
+###
+GET localhost:7070/api/recipes/name/recipe2
+Authorization: Bearer {{token}}
+###
+POST localhost:7070/api/recipes
+Authorization: Bearer {{token}}
+accept: application/json
+content-type: application/json
+
+{
+  "name": "recipe4",
+  "description": "description4",
+  "ingredients": "ingredients4",
+  "instructions": "instructions4",
+  "author": 2,
+  "tags": [
+    {
+      "name": "tag1"
+    }
+  ]
+}
+
+###
+
+PUT localhost:7070/api/recipes/2
+Authorization: Bearer {{token}}
+content-type: application/json
+
+{
+  "name": "Changed Name",
+  "description": "Changed Description",
+  "ingredients": "Changed Ingredients",
+  "instructions": "Changed Instructions",
+  "author": 2,
+  "tags": [
+    {
+      "name": "tag2"
+    }
+  ]
+}
+
+###
+
+DELETE localhost:7070/api/recipes/2
+Authorization: Bearer {{token}}

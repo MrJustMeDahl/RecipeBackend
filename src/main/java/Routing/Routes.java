@@ -6,6 +6,7 @@ import DTO.PersonDTO;
 import Exceptions.APIException;
 import Exceptions.ExceptionHandler;
 import Security.DAO.PersonDAO;
+import Security.RoutingRoles;
 import io.javalin.Javalin;
 import io.javalin.apibuilder.EndpointGroup;
 
@@ -25,19 +26,19 @@ public class Routes {
         return () -> {
             app.routes(() -> {
                 path("/", () -> {
-                    get(PERSONS, personController.getAll());
-                    get(PERSONS + "/{id}", personController.getById());
-                    get(PERSONS + "/name/{name}", personController.getByName());
+                    get(PERSONS, personController.getAll(), RoutingRoles.ADMIN);
+                    get(PERSONS + "/{id}", personController.getById(), RoutingRoles.ADMIN);
+                    get(PERSONS + "/name/{name}", personController.getByName(), RoutingRoles.ADMIN);
                     // get(PERSONS + "/email/{email}", personController.getPersonByEmail()); todo
-                    put(PERSONS + "/{id}", personController.update());
-                    post(PERSONS, personController.create());
-                    delete(PERSONS + "/{id}", personController.delete());
-                    get(RECIPES, recipeController.getAll());
-                    get(RECIPES + "/{id}", recipeController.getById());
-                    get(RECIPES + "/name/{name}", recipeController.getByName());
-                    put(RECIPES + "/{id}", recipeController.update());
-                    post(RECIPES, recipeController.create());
-                    delete(RECIPES + "/{id}", recipeController.delete());
+                    put(PERSONS + "/{id}", personController.update(), RoutingRoles.ADMIN);
+                    post(PERSONS, personController.create(), RoutingRoles.ADMIN);
+                    delete(PERSONS + "/{id}", personController.delete(), RoutingRoles.ADMIN);
+                    get(RECIPES, recipeController.getAll(), RoutingRoles.ADMIN, RoutingRoles.AUTHOR, RoutingRoles.READER, RoutingRoles.ANYONE);
+                    get(RECIPES + "/{id}", recipeController.getById(), RoutingRoles.ADMIN, RoutingRoles.AUTHOR, RoutingRoles.READER, RoutingRoles.ANYONE);
+                    get(RECIPES + "/name/{name}", recipeController.getByName(), RoutingRoles.ADMIN, RoutingRoles.AUTHOR, RoutingRoles.READER, RoutingRoles.ANYONE);
+                    put(RECIPES + "/{id}", recipeController.update(), RoutingRoles.ADMIN, RoutingRoles.AUTHOR);
+                    post(RECIPES, recipeController.create(), RoutingRoles.ADMIN, RoutingRoles.AUTHOR);
+                    delete(RECIPES + "/{id}", recipeController.delete(), RoutingRoles.ADMIN, RoutingRoles.AUTHOR);
                 });
                 path("/", authRoutes.getRoutes());
             });

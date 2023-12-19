@@ -36,6 +36,6 @@ public class AccessManagerController {
     private RoutingRoles getUserRole(Context context) throws APIException {
         String token = context.header("Authorization").split(" ")[1];
         PersonDTO person = tokenActions.verifyToken(token);
-        return RoutingRoles.valueOf(person.getRole());
+        return RoutingRoles.valueOf(person.getRole().toUpperCase());
     }
 }

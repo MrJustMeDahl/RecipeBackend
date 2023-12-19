@@ -8,6 +8,8 @@ content-type: application/json
   "name": "Test Testesen"
 }
 
+> {% client.global.set("token", response.body.token); %}
+
 ###
 
 POST http://localhost:7070/api/auth/register
@@ -19,6 +21,8 @@ content-type: application/json
 "role": "admin",
 "name": "Test Testesen2"
 }
+
+> {% client.global.set("token", response.body.token); %}
 
 ###
 
@@ -32,6 +36,8 @@ content-type: application/json
 "name": "Test Testesen3"
 }
 
+> {% client.global.set("token", response.body.token); %}
+
 ###
 
 POST http://localhost:7070/api/auth/login
@@ -41,6 +47,8 @@ content-type: application/json
   "email": "cph-test@cphbusiness.dk",
   "password": "dettebliverhashet"
 }
+
+> {% client.global.set("token", response.body.token); %}
 
 ###
 
@@ -52,6 +60,8 @@ content-type: application/json
   "password": "dettebliverhashet2"
 }
 
+> {% client.global.set("token", response.body.token); %}
+
 ###
 
 POST http://localhost:7070/api/auth/login
@@ -59,6 +69,7 @@ content-type: application/json
 
 {
   "email": "cph-test@cphbusiness3.dk",
-
   "password": "dettebliverhashet3"
 }
+
+> {% client.global.set("token", response.body.token); %}
