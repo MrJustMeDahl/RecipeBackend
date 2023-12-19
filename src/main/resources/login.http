@@ -59,5 +59,6 @@ content-type: application/json
 
 {
   "email": "cph-test@cphbusiness3.dk",
+
   "password": "dettebliverhashet3"
 }

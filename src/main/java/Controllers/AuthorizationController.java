@@ -9,8 +9,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.javalin.http.Context;
-import io.javalin.http.Handler;
-import jakarta.persistence.EntityManagerFactory;
 
 import java.util.Arrays;
 import java.util.List;
